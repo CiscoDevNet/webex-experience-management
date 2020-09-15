@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Page Survey</title>
+    <link rel='stylesheet' type='text/css' media='screen' href="css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="preloader" class="loader">
+        <!-- <i class="fa fa-spinner fa-spin fa-3x fa-fw color-i"></i> -->
+        <img  class="spinner" src="img/black_spinner.gif" alt="spinner"/>
+    </div>
+    <div id="main-page" class="login">
+        <div class="scroll-wrapper" style="max-height: 690px;">
+            <!-- NPS Question text -->
+            <div class="question-text"><span>1.&nbsp;</span><span id="text1" class="ng-tns-c6-1"></span>
+
+            </div>
+            <!-- NPS Question Text UI div -->
+            <div class="question-body">
+                <div class="ng-tns-c6-1">
+                    <div class="outer-div">
+                        <div style="width: 100%; height: 100%;" class="ng-star-inserted">
+                            <div class="ng-star-inserted">
+                                <div class="scale">
+                                    <div class="scale-container">
+                                        <div class="scale-buttons" id="nps-value">
+                                            <!-- 10 scale question  -->
+                                            <div class="ng-star-inserted dec" style=" cursor: pointer;"> 0 </div>
+                                            <div class="ng-star-inserted dec" style=" cursor: pointer;"> 1 </div>
+                                            <div class="ng-star-inserted dec" style=" cursor: pointer;"> 2 </div>
+                                            <div class="ng-star-inserted dec" style=" cursor: pointer;"> 3 </div>
+                                            <div class="ng-star-inserted dec" style=" cursor: pointer;"> 4 </div>
+                                            <div class="ng-star-inserted dec" style=" cursor: pointer;"> 5 </div>
+                                            <div class="ng-star-inserted dec" style=" cursor: pointer;"> 6 </div>
+                                            <div class="ng-star-inserted passive" style=" cursor: pointer;"> 7 </div>
+                                            <div class="ng-star-inserted passive" style=" cursor: pointer;"> 8 </div>
+                                            <div class="ng-star-inserted promoter" style="cursor: pointer;"> 9 </div>
+                                            <div class="ng-star-inserted promoter" style="cursor: pointer;"> 10
+                                            </div>
+                                        </div>
+                                        <!-- NPS below legend details -->
+                                        <div class="scale-legend">
+                                            <div class="nps-legend ng-star-inserted">
+                                                <div class="ng-star-inserted">Not at all Likely</div>
+                                                <div class="ng-star-inserted">Maybe</div>
+                                                <div class="ng-star-inserted">Extremely Likely</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 5 star rating question  -->
+            <div class="question-text"><span>2.&nbsp;</span><span id="text2" class="ng-tns-c6-1"></span>
+
+            </div>
+            <div class="outer-div" data-question-type="Star-5">
+                <div class="ng-star-inserted">
+
+                    <div class="outer-div1" dir="default">
+                        <div class="inner-div">
+                            <div class="blocks" id="rating">
+                                <!-- five star SVG images  -->
+                                <div class="rating-icon ng-star-inserted">
+                                    <!-- bold images and outerline images -->
+                                    <img src="https://cx.cloudcherry.com/survey-assets/v1/star1.svg" alt="1"
+                                        class=""><img class="hidden" 
+                                        src="https://cx.cloudcherry.com/survey-assets/v1/star_on.svg" alt="1">
+                                </div>
+                                <div class="rating-icon ng-star-inserted">
+                                    <img src="https://cx.cloudcherry.com/survey-assets/v1/star2.svg" alt="2"
+                                        class=""><img class="hidden" 
+                                        src="https://cx.cloudcherry.com/survey-assets/v1/star_on.svg" alt="2" />
+                                </div>
+                                <div class="rating-icon ng-star-inserted" >
+                                    <img data-value="3" alt="3"
+                                        src="https://cx.cloudcherry.com/survey-assets/v1/star3.svg" class=""><img
+                                        class="hidden" src="https://cx.cloudcherry.com/survey-assets/v1/star_on.svg"
+                                        alt="3" />
+                                </div>
+                                <div class="rating-icon ng-star-inserted" >
+                                    <img src="https://cx.cloudcherry.com/survey-assets/v1/star4.svg" alt="4"
+                                        class=""><img class="hidden"
+                                        src="https://cx.cloudcherry.com/survey-assets/v1/star_on.svg" alt="4" />
+                                </div>
+                                <div class="rating-icon ng-star-inserted">
+                                    <img src="https://cx.cloudcherry.com/survey-assets/v1/star5.svg" alt="5"
+                                        class=""><img class="hidden"
+                                        src="https://cx.cloudcherry.com/survey-assets/v1/star_on.svg" alt="5" />
+                                </div>
+
+                            </div>
+
+                            <div class="bar ng-star-inserted">
+                                <!-- line for five star ratings -->
+                                <div class="ng-star-inserted" style="background-color: rgb(222, 103, 94);"></div>
+                                <div class="ng-star-inserted" style="background-color: rgb(238, 165, 65);"></div>
+                                <div class="ng-star-inserted" style="background-color: rgb(138, 182, 134);"></div>
+                            </div>
+                            <div class="legends">
+                                <!-- legends for five star ratings -->
+                                <div class="text ng-star-inserted"><span>Not
+                                        Great</span><span>Awesome</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- comments fields -->
+            <div class="comment">
+                <div class="question-text"><span>3.&nbsp;</span><span id="text3" span class="ng-tns-c6-1"></span>
+                </div>
+                <!-- comment fields textarea  -->
+                <div>
+                    <textarea id="w3mission" rows="6" cols="50"></textarea>
+                </div>
+            </div>
+        </div>
+        <!-- submit button for submit survey -->
+        <div class="form__group">
+            <button id="submit-survey" class="button-submit" onclick="postSurvey()"> <span>Submit</span></button>
+        </div>
+    </div>
+
+    <!-- thank you page div -->
+    <div id="thank-you" class="login">
+        <br>
+        <br>
+        <h3 style="text-align:center">Thank you for submitting your feedback</h3>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+
+<script defer src="./js/main.js"></script>
+</body>
+<script>
+    document.onreadystatechange = function() { 
+  if (document.readyState !== "complete") { 
+      document.querySelector( 
+        "#preloader").style.visibility = "visible"; 
+  } else { 
+      document.querySelector( 
+        "#preloader").style.display = "none"; 
+      document.querySelector( 
+        "body").style.visibility = "visible"; 
+  } 
+}; 
+</script>
+
+
+</html>

@@ -1,0 +1,280 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Condition": {
+                "actions": {
+                    "Append_to_string_variable": {
+                        "inputs": {
+                            "name": "SurveyLink",
+                            "value": "@body('Parse_JSON')?['id']"
+                        },
+                        "runAfter": {
+                            "Parse_JSON": [
+                                "Succeeded"
+                            ]
+                        },
+                        "type": "AppendToStringVariable"
+                    },
+                    "HTTP": {
+                        "inputs": {
+                            "authentication": {
+                                "password": "{Expereince Management APIKey or Password}",
+                                "type": "Basic",
+                                "username": "{Expereince Management Username}"
+                            },
+                            "body": {
+                                "location": "5f17d93f5248ac19c0922b2e",
+                                "prefill": [
+                                    {
+                                        "numberInput": 0,
+                                        "questionId": "5f087f8235212616cc9d3662",
+                                        "questionText": "Name of the Customer",
+                                        "textInput": "@{triggerBody()?['Name']}"
+                                    },
+                                    {
+                                        "numberInput": 0,
+                                        "questionId": "5f17d2fb480a140a2c0c1ded",
+                                        "questionText": "Salesforce Case ID",
+                                        "textInput": "@{triggerBody()?['Cloudcherry_1__Email__c']}"
+                                    }
+                                ],
+                                "validTill": 30,
+                                "validUses": 1
+                            },
+                            "method": "POST",
+                            "uri": "https://api.getcloudcherry.com/api/SurveyToken"
+                        },
+                        "runAfter": {},
+                        "type": "Http"
+                    },
+                    "Parse_JSON": {
+                        "inputs": {
+                            "content": "@body('HTTP')",
+                            "schema": {
+                                "properties": {
+                                    "browserQuestion": {},
+                                    "browserVersionQuestion": {},
+                                    "campaign": {},
+                                    "cityQuestion": {},
+                                    "classicCaptcha": {
+                                        "type": "boolean"
+                                    },
+                                    "commonIdentifier": {},
+                                    "countryQuestion": {},
+                                    "created": {
+                                        "type": "string"
+                                    },
+                                    "deliveryPlanId": {},
+                                    "deviceBrandQuestion": {},
+                                    "deviceQuestion": {},
+                                    "dispatchId": {},
+                                    "displayExitMessage": {},
+                                    "displayExpiredMessage": {},
+                                    "doNotPartialSubmit": {
+                                        "type": "boolean"
+                                    },
+                                    "doNotSocialShare": {},
+                                    "emailOpenUA": {},
+                                    "emailQuestion": {},
+                                    "evalFilter": {},
+                                    "externalApiPostURLEval": {},
+                                    "id": {
+                                        "type": "string"
+                                    },
+                                    "ipAddressQuestion": {},
+                                    "isDeliveryTypePull": {
+                                        "type": "boolean"
+                                    },
+                                    "isEmailed": {
+                                        "type": "boolean"
+                                    },
+                                    "isPrinted": {
+                                        "type": "boolean"
+                                    },
+                                    "lastDeliveryException": {},
+                                    "lastDeliveryRun": {},
+                                    "lastInviteDelivery": {},
+                                    "lastInviteOpen": {},
+                                    "lastSequenceDeliveryRun": {},
+                                    "lastSurveyIssue": {},
+                                    "lastSurveyIssueChannel": {},
+                                    "listenFromTwitter": {},
+                                    "location": {
+                                        "type": "string"
+                                    },
+                                    "nextDeliveryRun": {},
+                                    "note": {},
+                                    "osQuestion": {},
+                                    "perSamplePresent": {
+                                        "type": "integer"
+                                    },
+                                    "postPrefillDataBeforExpiry": {
+                                        "type": "boolean"
+                                    },
+                                    "preFill": {
+                                        "items": {
+                                            "properties": {
+                                                "numberInput": {
+                                                    "type": "integer"
+                                                },
+                                                "questionId": {
+                                                    "type": "string"
+                                                },
+                                                "questionText": {
+                                                    "type": "string"
+                                                },
+                                                "textInput": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "questionId",
+                                                "questionText",
+                                                "textInput",
+                                                "numberInput"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "preFillViaAPICallBack": {},
+                                    "preferredLanguage": {},
+                                    "regionQuestion": {},
+                                    "requireCaptcha": {
+                                        "type": "boolean"
+                                    },
+                                    "restrictBySignature": {},
+                                    "restrictFromIPSpace": {},
+                                    "restrictOnWebDomain": {},
+                                    "rewardCode": {},
+                                    "samplingMode": {
+                                        "type": "boolean"
+                                    },
+                                    "skipWelcome": {
+                                        "type": "boolean"
+                                    },
+                                    "stateQuestion": {},
+                                    "tagAlongTokens": {},
+                                    "uaQuestion": {},
+                                    "user": {
+                                        "type": "string"
+                                    },
+                                    "validAfter": {},
+                                    "validTill": {
+                                        "type": "string"
+                                    },
+                                    "validUses": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "runAfter": {
+                            "HTTP": [
+                                "Succeeded"
+                            ]
+                        },
+                        "type": "ParseJson"
+                    },
+                    "Send_Email_(V3)": {
+                        "inputs": {
+                            "body": {
+                               "Body": "<p>Dear @{triggerBody()?['Name']},<br>\n<br>\nOur endeavour is to deliver delightful experiences at every interaction. Help us understand if we are keeping up to our mission! Please share your valuable feedback on your recent experience <br>\n<br>\nSurveyLink: @{variables('SurveyLink')}<br>\n<br>\nRegards,<br>\nCumulus Support</p>",
+                                "From": "From Email Address",
+                                "Subject": "Please provide your valuable feedback",
+                                "To": "@triggerBody()?['Cloudcherry_1__Email__c']"
+                            },
+                            "host": {
+                                "connection": {
+                                    "name": "@parameters('$connections')['smtp']['connectionId']"
+                                }
+                            },
+                            "method": "post",
+                            "path": "/SendEmailV3"
+                        },
+                        "runAfter": {
+                            "Append_to_string_variable": [
+                                "Succeeded"
+                            ]
+                        },
+                        "type": "ApiConnection"
+                    }
+                },
+                "expression": {
+                    "and": [
+                        {
+                            "equals": [
+                                "@triggerBody()?['Account_Status__c']",
+                                "Inactive"
+                            ]
+                        }
+                    ]
+                },
+                "runAfter": {
+                    "Initialize_variable": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "If"
+            },
+            "Initialize_variable": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "SurveyLink",
+                            "type": "string",
+                            "value": " http://nps.bz/"
+                        }
+                    ]
+                },
+                "runAfter": {},
+                "type": "InitializeVariable"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "parameters": {
+            "$connections": {
+                "defaultValue": {},
+                "type": "Object"
+            }
+        },
+        "triggers": {
+            "When_a_record_is_modified": {
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['salesforce']['connectionId']"
+                        }
+                    },
+                    "method": "get",
+                    "path": "/datasets/default/tables/@{encodeURIComponent(encodeURIComponent('Account'))}/onupdateditems"
+                },
+                "recurrence": {
+                    "frequency": "Second",
+                    "interval": 1
+                },
+                "splitOn": "@triggerBody()?['value']",
+                "type": "ApiConnection"
+            }
+        }
+    },
+    "parameters": {
+        "$connections": {
+            "value": {
+                "salesforce": {
+                    "connectionId": "/subscriptions/7cc7e59f-8d1c-429a-929a-26cbcff44311/resourceGroups/Global/providers/Microsoft.Web/connections/salesforce-20",
+                    "connectionName": "salesforce-0",
+                    "id": "/subscriptions/7fc7e59f-8d1c-4297-929a-27cbcff44311/providers/Microsoft.Web/locations/southindia/managedApis/salesforce"
+                },
+                "smtp": {
+                    "connectionId": "/subscriptions/7fc7e59f-8d1a-429a-929a-27cbcff44321/resourceGroups/Global/providers/Microsoft.Web/connections/smtp",
+                    "connectionName": "smtp",
+                    "id": "/subscriptions/7fc7e59f-8d1c-4296-929a-27cbcff43311/providers/Microsoft.Web/locations/southindia/managedApis/smtp"
+                }
+            }
+        }
+    }
+}

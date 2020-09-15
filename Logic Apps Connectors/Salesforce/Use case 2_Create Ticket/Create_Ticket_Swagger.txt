@@ -1,0 +1,634 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Create_record_2": {
+                "inputs": {
+                    "body": {
+                        "Customer_Feedback__c": "@variables('Description')",
+                        "Email__c": "@variables('Email')",
+                        "NPS__c": "@{variables('NPS')}",
+                        "Origin": "Email",
+                        "Priority": "Medium",
+                        "Status": "New",
+                        "Subject": "NPS Ticket",
+                        "SuppliedName": "@variables('Name')",
+                        "WXM_Response_Id__c": "@triggerBody()?['answer']?['id']"
+                    },
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['salesforce_1']['connectionId']"
+                        }
+                    },
+                    "method": "post",
+                    "path": "/v2/datasets/default/tables/@{encodeURIComponent(encodeURIComponent('Case'))}/items"
+                },
+                "runAfter": {
+                    "For_each": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "ApiConnection"
+            },
+            "Description": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "Description",
+                            "type": "String"
+                        }
+                    ]
+                },
+                "runAfter": {
+                    "NPS": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "InitializeVariable"
+            },
+            "Email": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "Email",
+                            "type": "String"
+                        }
+                    ]
+                },
+                "runAfter": {
+                    "Name": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "InitializeVariable"
+            },
+            "Email_id": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "Email_id",
+                            "type": "String"
+                        }
+                    ]
+                },
+                "runAfter": {
+                    "Name_id": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "InitializeVariable"
+            },
+            "For_each": {
+                "actions": {
+                    "Condition": {
+                        "actions": {
+                            "Set_variable": {
+                                "inputs": {
+                                    "name": "Name",
+                                    "value": "@items('For_each')?['textInput']"
+                                },
+                                "runAfter": {},
+                                "type": "SetVariable"
+                            }
+                        },
+                        "expression": {
+                            "and": [
+                                {
+                                    "equals": [
+                                        "@items('For_each')?['questionId']",
+                                        "@variables('Name_id')"
+                                    ]
+                                }
+                            ]
+                        },
+                        "runAfter": {},
+                        "type": "If"
+                    },
+                    "Condition_11": {
+                        "actions": {
+                            "Set_variable_11": {
+                                "inputs": {
+                                    "name": "NPS",
+                                    "value": "@items('For_each')?['numberInput']"
+                                },
+                                "runAfter": {},
+                                "type": "SetVariable"
+                            }
+                        },
+                        "expression": {
+                            "and": [
+                                {
+                                    "equals": [
+                                        "@items('For_each')?['questionId']",
+                                        "@variables('NPS_ID')"
+                                    ]
+                                }
+                            ]
+                        },
+                        "runAfter": {
+                            "Condition_4": [
+                                "Succeeded"
+                            ]
+                        },
+                        "type": "If"
+                    },
+                    "Condition_2": {
+                        "actions": {
+                            "Set_variable_2": {
+                                "inputs": {
+                                    "name": "Email",
+                                    "value": "@items('For_each')?['textInput']"
+                                },
+                                "runAfter": {},
+                                "type": "SetVariable"
+                            }
+                        },
+                        "expression": {
+                            "and": [
+                                {
+                                    "equals": [
+                                        "@items('For_each')?['questionId']",
+                                        "@variables('Email_id')"
+                                    ]
+                                }
+                            ]
+                        },
+                        "runAfter": {
+                            "Condition": [
+                                "Succeeded"
+                            ]
+                        },
+                        "type": "If"
+                    },
+                    "Condition_3": {
+                        "actions": {
+                            "Set_variable_3": {
+                                "inputs": {
+                                    "name": "Description",
+                                    "value": "@items('For_each')?['textInput']"
+                                },
+                                "runAfter": {},
+                                "type": "SetVariable"
+                            }
+                        },
+                        "expression": {
+                            "and": [
+                                {
+                                    "equals": [
+                                        "@items('For_each')?['questionId']",
+                                        "@variables('User_comments_id')"
+                                    ]
+                                }
+                            ]
+                        },
+                        "runAfter": {
+                            "Condition_2": [
+                                "Succeeded"
+                            ]
+                        },
+                        "type": "If"
+                    },
+                    "Condition_4": {
+                        "actions": {
+                            "Set_variable_4": {
+                                "inputs": {
+                                    "name": "Mobile",
+                                    "value": "@items('For_each')?['textInput']"
+                                },
+                                "runAfter": {},
+                                "type": "SetVariable"
+                            }
+                        },
+                        "expression": {
+                            "and": [
+                                {
+                                    "equals": [
+                                        "@items('For_each')?['questionId']",
+                                        "@variables('Mobile_id')"
+                                    ]
+                                }
+                            ]
+                        },
+                        "runAfter": {
+                            "Condition_3": [
+                                "Succeeded"
+                            ]
+                        },
+                        "type": "If"
+                    }
+                },
+                "foreach": "@triggerBody()?['answer']?['responses']",
+                "runAfter": {
+                    "For_each_2": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Foreach"
+            },
+            "For_each_2": {
+                "actions": {
+                    "Condition_5": {
+                        "actions": {
+                            "Set_variable_5": {
+                                "inputs": {
+                                    "name": "Name_id",
+                                    "value": "@items('For_each_2')?['id']"
+                                },
+                                "runAfter": {},
+                                "type": "SetVariable"
+                            }
+                        },
+                        "expression": {
+                            "and": [
+                                {
+                                    "equals": [
+                                        "@items('For_each_2')?['note']",
+                                        "name"
+                                    ]
+                                }
+                            ]
+                        },
+                        "runAfter": {},
+                        "type": "If"
+                    },
+                    "Condition_6": {
+                        "actions": {
+                            "Set_variable_6": {
+                                "inputs": {
+                                    "name": "Email_id",
+                                    "value": "@items('For_each_2')?['id']"
+                                },
+                                "runAfter": {},
+                                "type": "SetVariable"
+                            }
+                        },
+                        "expression": {
+                            "and": [
+                                {
+                                    "equals": [
+                                        "@items('For_each_2')?['note']",
+                                        "Email"
+                                    ]
+                                }
+                            ]
+                        },
+                        "runAfter": {
+                            "Condition_5": [
+                                "Succeeded"
+                            ]
+                        },
+                        "type": "If"
+                    },
+                    "Condition_7": {
+                        "actions": {
+                            "Set_variable_7": {
+                                "inputs": {
+                                    "name": "Mobile_id",
+                                    "value": "@items('For_each_2')?['id']"
+                                },
+                                "runAfter": {},
+                                "type": "SetVariable"
+                            }
+                        },
+                        "expression": {
+                            "and": [
+                                {
+                                    "equals": [
+                                        "@items('For_each_2')?['note']",
+                                        "Mobile number"
+                                    ]
+                                }
+                            ]
+                        },
+                        "runAfter": {
+                            "Condition_6": [
+                                "Succeeded"
+                            ]
+                        },
+                        "type": "If"
+                    },
+                    "Condition_8": {
+                        "actions": {
+                            "Set_variable_8": {
+                                "inputs": {
+                                    "name": "User_comments_id",
+                                    "value": "@items('For_each_2')?['id']"
+                                },
+                                "runAfter": {},
+                                "type": "SetVariable"
+                            }
+                        },
+                        "expression": {
+                            "and": [
+                                {
+                                    "equals": [
+                                        "@items('For_each_2')?['note']",
+                                        "Comment"
+                                    ]
+                                }
+                            ]
+                        },
+                        "runAfter": {
+                            "Condition_7": [
+                                "Succeeded"
+                            ]
+                        },
+                        "type": "If"
+                    },
+                    "Condition_9": {
+                        "actions": {
+                            "Set_variable_9": {
+                                "inputs": {
+                                    "name": "NPS_ID",
+                                    "value": "@items('For_each_2')?['id']"
+                                },
+                                "runAfter": {},
+                                "type": "SetVariable"
+                            }
+                        },
+                        "expression": {
+                            "and": [
+                                {
+                                    "equals": [
+                                        "@items('For_each_2')?['note']",
+                                        "NPS"
+                                    ]
+                                }
+                            ]
+                        },
+                        "runAfter": {
+                            "Condition_8": [
+                                "Succeeded"
+                            ]
+                        },
+                        "type": "If"
+                    }
+                },
+                "foreach": "@body('Get_Active_Questions_info')",
+                "runAfter": {
+                    "Get_Active_Questions_info": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Foreach"
+            },
+            "Get_Active_Questions_info": {
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['Get_active_Questions']['connectionId']"
+                        }
+                    },
+                    "method": "get",
+                    "path": "/api/Questions/Active"
+                },
+                "runAfter": {
+                    "NPS_Id": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "ApiConnection"
+            },
+            "HTTP": {
+                "inputs": {
+                    "authentication": {
+						"password": "{Expereince Management APIKey or Password}",
+						"type": "Basic",
+                        "username": "{Expereince Management Username}"
+                    },
+                    "body": {
+                        "note": "New ticket is created in Salesforce, Case ID: @{body('Create_record_2')?['CaseNumber']} and Status:@{body('Create_record_2')?['Status']}"
+                    },
+                    "method": "POST",
+                    "uri": "https://api.getcloudcherry.com/api/Answers/Note/@{triggerBody()?['answer']?['id']}"
+                },
+                "runAfter": {
+                    "Create_record_2": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Http"
+            },
+            "NPS": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "NPS",
+                            "type": "integer"
+                        }
+                    ]
+                },
+                "runAfter": {},
+                "type": "InitializeVariable"
+            },
+            "NPS_Id": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "NPS_ID",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "runAfter": {
+                    "user-comment": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "InitializeVariable"
+            },
+            "Name": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "Name",
+                            "type": "String"
+                        }
+                    ]
+                },
+                "runAfter": {
+                    "Description": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "InitializeVariable"
+            },
+            "Name_id": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "Name_id",
+                            "type": "String"
+                        }
+                    ]
+                },
+                "runAfter": {
+                    "mobile": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "InitializeVariable"
+            },
+            "body": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "body",
+                            "type": "String",
+                            "value": "@{triggerBody()}"
+                        }
+                    ]
+                },
+                "runAfter": {
+                    "Email": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "InitializeVariable"
+            },
+            "mobile": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "Mobile",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "runAfter": {
+                    "body": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "InitializeVariable"
+            },
+            "mobile_no": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "Mobile_id",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "runAfter": {
+                    "Email_id": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "InitializeVariable"
+            },
+            "user-comment": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "User_comments_id",
+                            "type": "String"
+                        }
+                    ]
+                },
+                "runAfter": {
+                    "mobile_no": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "InitializeVariable"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "parameters": {
+            "$connections": {
+                "defaultValue": {},
+                "type": "Object"
+            }
+        },
+        "triggers": {
+            "manual": {
+                "inputs": {
+                    "schema": {
+                        "properties": {
+                            "answer": {
+                                "properties": {
+                                    "archived": {
+                                        "type": "boolean"
+                                    },
+                                    "deviceId": {},
+                                    "id": {
+                                        "type": "string"
+                                    },
+                                    "locationId": {
+                                        "type": "string"
+                                    },
+                                    "notes": {},
+                                    "openTicket": {},
+                                    "responseDateTime": {
+                                        "type": "string"
+                                    },
+                                    "responseDuration": {
+                                        "type": "integer"
+                                    },
+                                    "responses": {
+                                        "items": {
+                                            "properties": {
+                                                "numberInput": {
+                                                    "type": "integer"
+                                                },
+                                                "questionId": {
+                                                    "type": "string"
+                                                },
+                                                "questionText": {
+                                                    "type": "string"
+                                                },
+                                                "textInput": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "questionId",
+                                                "questionText",
+                                                "textInput",
+                                                "numberInput"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "surveyClient": {
+                                        "type": "string"
+                                    },
+                                    "user": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "notification": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "kind": "Http",
+                "type": "Request"
+            }
+        }
+    },
+    "parameters": {
+        "$connections": {
+            "value": {
+                "Get_active_Questions": {
+                    "connectionId": "/subscriptions/7fc7e59f-8d1c-429a-929a-27cbcff44311/resourceGroups/Global/providers/Microsoft.Web/connections/Get-active-Qn-vishnu-5",
+                    "connectionName": "Get-active-Question",
+                    "id": "/subscriptions/7fc7e59f-8d1c-429a-929a-27cbcff44311/resourceGroups/Global/providers/Microsoft.Web/customApis/Get_active_Qn_vishnu"
+                },
+                "salesforce": {
+                    "connectionId": "/subscriptions/7cc7e59f-8d1c-429a-929a-26cbcff44311/resourceGroups/Global/providers/Microsoft.Web/connections/salesforce-20",
+                    "connectionName": "salesforce-0",
+                    "id": "/subscriptions/7fc7e59f-8d1c-4297-929a-27cbcff44311/providers/Microsoft.Web/locations/southindia/managedApis/salesforce"
+                }
+            }
+        }
+    }
+}

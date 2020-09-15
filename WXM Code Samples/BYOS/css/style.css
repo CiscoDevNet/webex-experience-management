@@ -1,0 +1,237 @@
+
+body{
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+}
+/* open sans font-family using all over the page  */
+textarea, input, select{
+    font-family: 'Open Sans', sans-serif;
+}
+/* login page fixing it in center */
+.login{
+    margin: auto;
+    width: 500px;
+    background: #fff;
+    border-radius: 3px;
+}
+.login p {
+    margin-bottom: 30px;
+}
+/* button submit UI */
+.button-submit {
+    min-height: 48px;
+    min-width: 120px;
+    line-height: 36px;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    background-color: #00bceb;
+    border-radius: 2px;
+    border: none;
+    color: #ffffff;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 0 16px;
+    cursor: pointer;
+    outline: none;
+    font-family: "Open Sans", sans-serif;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+/*  cooment box ui settings */
+textarea {
+    overflow: auto;
+    padding: 5px 0 5px 10px !important;
+    outline: none;
+    border: 1px solid;
+    border-radius: 3px;
+}
+span, p{
+    font-size:14px
+}
+.login .form__group {
+    text-align: center;
+}
+
+/* Nps survey ui */
+
+.scale .scale-container .scale-buttons div {
+    width: 3vw;
+    height: 3vw;
+    min-height: 42px;
+    min-width: 42px;
+    margin-right: 2px;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    line-height: 42px;
+    text-align: center;
+}
+
+.scale .scale-container .scale-buttons {
+    display: flex;
+    pointer-events: auto!important;
+    overflow: hidden;
+    margin-bottom: 12px;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+}
+/* Nps legend dasktop view */
+@media screen and (max-width: 1380px) and (min-width: 768px){
+.scale-legend {
+    font-size: 16px;
+    color: #424242;
+    font-weight: 400;
+}
+
+}
+/* Nps legend dasktop view */
+.scale-legend {
+    margin-top: 20px;
+    overflow: hidden;
+    font-size: 14px;
+    color: #424242;
+    font-weight: 400;
+    font-style: italic;
+}
+.scale-legend .nps-legend > div:nth-child(1) {
+    width: calc(63.63% - 1px);
+    padding-top: 5px;
+    border-top: 1px solid #ef5451;
+    text-align: left;
+}
+
+.scale-legend .nps-legend > div:nth-child(2) {
+width: calc(18.18% - 1px);
+    padding-top: 5px;
+    border-top: 1px solid #f5c664;
+    margin-left: 1px;
+    text-align: left;
+}
+.scale-legend .nps-legend > div:nth-child(3) {
+    width: calc(18.18% - 1px);
+    padding-top: 5px;
+    border-top: 1px solid #7eb780;
+    margin-left: 1px;
+    text-align: right;
+}
+.nps-legend{
+    display: flex;
+}
+.question-text span {
+    font-size: 20px;
+    text-align: left;
+}
+
+.question-text {
+    margin: 20px 0 20px 0;
+}
+/* star rating ui block */
+.blocks{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    cursor: pointer;
+}
+.blocks.rating-icon {
+    pointer-events: auto;
+    cursor: pointer;
+    width: calc((100% - 32px)/ 5);
+    height: auto;
+    margin-right: 8px;
+}
+.bar div:nth-child(1) {
+    width: calc(32% - 1px);
+    height: 4px;
+    margin: 0 1px 0 0;
+}
+.bar div:nth-child(2) {
+    width: calc(32% - 1px);
+    height: 4px;
+    margin: 0 1px 0 0;
+}
+.bar div:nth-child(3) {
+    width: calc(32% - 1px);
+    height: 4px;
+    margin: 0 1px 0 0;
+}
+.bar{
+    display: flex;
+    flex-direction: row;
+    margin-top: 16px;
+}
+.outer-div1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+}
+.rating-icon img {
+    width: 90%;
+}
+.rating-icon img:nth-child(2) {
+    display: none;
+}
+.question-text span > span {
+    float: left;
+    margin: 0;
+}
+/* textarea ui block */
+.text span:first-child{
+    text-align: left;
+    display: block;
+    width: 100px;
+    float: left; 
+    font-style: italic;
+}
+.text span:last-child{
+    text-align: right;
+    right: 12px;
+    position: relative;
+    display: block;
+    margin-top: 8px;
+    font-style: italic;
+}
+.comment {
+    margin-top: 35px;
+}
+/* hoving styles */
+.dec{
+background-color: rgb(238, 83, 65);
+}
+.dec:hover{
+    background-color: rgb(196, 68, 65) !important;
+}
+.passive:hover{
+    background-color: rgb(230, 171, 17) !important;
+}
+.promoter:hover{
+    background-color: rgb(104, 153, 107) !important;
+}
+.passive{
+    background-color: rgb(255, 188, 0);
+}
+.promoter{
+    background-color: rgb(126, 183, 127);
+}
+#thank-you{
+    display: none;
+}
+body{
+    visibility: hidden;
+   }
+div#preloader {
+    width: 1px;
+    height: 1px;
+    position: absolute;
+    top: -24%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
