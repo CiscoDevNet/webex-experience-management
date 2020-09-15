@@ -28,7 +28,7 @@ Experience Management provisions integrations in a couple of different ways:
 
 **Note:** Partners/Customers can create Logic apps workflows by subscribing to their own Microsoft Azure Logic apps subscription. It has a simple and extremely affordable consumption based pricing structure. Please follow the [link](https://azure.microsoft.com/en-us/pricing/details/logic-apps/) for more details. .
 
-View the list of service providers supported by Experience Management [here](https://cloudcherry.com/docs/integrationscontent/integrationcatalog/).
+View the list of service providers supported by Experience Management [here](https://cloudcherry.com/docs/integrationscontent/serviceproviders/).
 
 ******
 
