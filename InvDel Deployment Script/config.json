@@ -1,0 +1,46 @@
+{
+    "Host": "",
+    "Username": "",
+    "Port": 22,
+    "Key_Filename": "",
+    "Service_Name": "",
+    "MongoDB": {
+        "SameServerDeployment": false,
+        "MongoDB_Connection": "",
+        "MongoDB_Database": ""
+    },
+    "Clone_Repo_URL": "https://github.com/cisco/WXM-Invitations.git",  
+    "Certs": {
+        "IsProd": true,
+        "key_path": "",
+        "certificate_path": "",
+        "domain_name": ""
+    },
+    "NotificationAndReportModule": {
+        "InstallNotificationAndReportModule": true
+    },
+    "NotificationLogAuthentication": {
+        "Username": "",
+        "Password": ""
+    },
+	"DotnetDownloadLink": {
+		"Windows": "https://download.visualstudio.microsoft.com/download/pr/dafb4b49-9990-49aa-b8fe-9002c1a3578a/42acda06cb3d22d886b91aac37fda667/dotnet-sdk-3.1.302-win-x64.zip",
+		"MacOS": "https://download.visualstudio.microsoft.com/download/pr/271e75d7-5d38-4e7c-978f-6871bed679c8/fab96db72433839ad0353c6dec2692e3/dotnet-sdk-3.1.302-osx-x64.tar.gz"
+	},
+	
+	"SftpS3": {
+		"InstallsftpS3": false,
+		"BucketName": "",
+		"AWSAccessKeyId": "",
+		"AWSSecretAccessKey": "",
+		"BucketRegionCode": "",
+		"BaseDirectory": "",
+		"IsServerDeployment": "",
+		"SFTPBaseDirectory": "",
+		"SFTPUrl": "",
+		"SFTPPort": "",
+		"SFTPUsername": "",
+		"SFTPPassword": ""
+	}
+
+}
